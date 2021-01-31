@@ -15,6 +15,7 @@ public class SelectionSort {
      * @param j
      * {@link SelectionSort}
      */
+    // Constant Time Algorithm O(1)
     public static void swapElements(int[] array, int i, int j) {
 
         int temp = array[i];
@@ -31,6 +32,7 @@ public class SelectionSort {
      * @param start
      * {@link SelectionSort}
      */
+    // Linear Algorithm O(n)
     public static int indexLowest(int[] array, int start) {
 
         int lowIndex = start;
@@ -46,6 +48,7 @@ public class SelectionSort {
      * author Mohammed Amr
      * {@link SelectionSort}
      */
+    // Quadratic Algorithm O(n square 2)
     public static void selectionSort(int[] array) {
 
         for (int i = 0; i < array.length; i++) {
