@@ -18,6 +18,11 @@ public class LinkedListDemo {
         list.insertAtHead(20);
 
         System.out.println(list);
-        System.out.println("Size = " + list.lenght());
+        System.out.println("Size = " + list.length());
+        
+        list.deleteFromHead();
+
+        System.out.println(list);
+        System.out.println("Size = " + list.length());
     }
 }

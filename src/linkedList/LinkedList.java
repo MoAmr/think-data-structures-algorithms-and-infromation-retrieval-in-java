@@ -16,7 +16,7 @@ public class LinkedList {
     }
 
 
-    public int lenght() {
+    public int length() {
         int length = 0;
         Node current = this.head;
         while (current != null) {
@@ -24,6 +24,10 @@ public class LinkedList {
             current = current.getNextNode();
         }
         return length;
+    }
+
+    public void deleteFromHead() {
+        this.head = this.head.getNextNode();
     }
 
     @Override
