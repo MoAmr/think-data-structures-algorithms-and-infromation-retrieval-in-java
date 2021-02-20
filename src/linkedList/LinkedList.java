@@ -46,7 +46,7 @@ public class LinkedList {
         String result = "{";
         Node current = this.head;
         while (current != null) {
-            result += current.toString() + ",";
+            result += current.toString() + ", ";
             current = current.getNextNode();
         }
 
