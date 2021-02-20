@@ -15,6 +15,17 @@ public class LinkedList {
         this.head = newNode;
     }
 
+
+    public int lenght() {
+        int length = 0;
+        Node current = this.head;
+        while (current != null) {
+            length++;
+            current = current.getNextNode();
+        }
+        return length;
+    }
+
     @Override
     public String toString() {
         String result = "{";
