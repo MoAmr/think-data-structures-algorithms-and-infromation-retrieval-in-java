@@ -16,6 +16,12 @@ public class TreeNode {
         this.data = data;
     }
 
+    public Integer smallest() {
+        if (this.leftChild == null)
+            return this.data;
+        return this.leftChild.smallest();
+    }
+
     public TreeNode find(Integer data) {
 
         if (this.data == data && !isDeleted)
