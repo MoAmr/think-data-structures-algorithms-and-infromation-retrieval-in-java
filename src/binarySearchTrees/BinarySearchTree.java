@@ -25,6 +25,37 @@ public class BinarySearchTree {
     }
 
     public void delete(Integer data) {
+        TreeNode current = this.root;
+        TreeNode parent = this.root;
+        boolean isLeftChild = false;
 
+        if (current == null)
+            return;
+
+        while (current != null && current.getData() != data) {
+            parent = current;
+
+            if (data < current.getData()) {
+                current = current.getLeftChild();
+                isLeftChild = true;
+            } else {
+                current = current.getRightChild();
+                isLeftChild = false;
+            }
+        }
+
+        if (current == null)
+            return;
+
+        // Checking if the node that is about to be deleted is a Leaf Node
+        if (current.getLeftChild() == null && current.getRightChild() == null)
+            if (current == root) {
+                root = null;
+            } else {
+                if (isLeftChild)
+                    parent.setLeftChild(null);
+                else
+                    parent.setRightChild(null);
+            }
     }
 }
