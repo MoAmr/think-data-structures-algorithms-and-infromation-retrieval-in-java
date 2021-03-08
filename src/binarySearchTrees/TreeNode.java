@@ -16,6 +16,14 @@ public class TreeNode {
         this.data = data;
     }
 
+    public void traverseInOrder() {
+        if (this.leftChild != null)
+            this.leftChild.traverseInOrder();
+        System.out.print(this + " ");
+        if (this.rightChild != null)
+            this.rightChild.traverseInOrder();
+    }
+
     public Integer smallest() {
         if (this.leftChild == null)
             return this.data;

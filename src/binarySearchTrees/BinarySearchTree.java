@@ -36,60 +36,94 @@ public class BinarySearchTree {
         return null;
     }
 
-    public void delete(Integer data) {
-        TreeNode toDel = find(data);
-        toDel.delete();
-    }
 //    public void delete(Integer data) {
-//        TreeNode current = this.root;
-//        TreeNode parent = this.root;
-//        boolean isLeftChild = false;
-//
-//        if (current == null)
-//            return;
-//
-//        while (current != null && current.getData() != data) {
-//            parent = current;
-//
-//            if (data < current.getData()) {
-//                current = current.getLeftChild();
-//                isLeftChild = true;
-//            } else {
-//                current = current.getRightChild();
-//                isLeftChild = false;
-//            }
-//        }
-//
-//        if (current == null)
-//            return;
-//
-//        // Checking if the node that is about to be deleted is a Leaf Node
-//        if (current.getLeftChild() == null && current.getRightChild() == null)
-//            if (current == root) {
-//                root = null;
-//            } else {
-//                if (isLeftChild)
-//                    parent.setLeftChild(null);
-//                else
-//                    parent.setRightChild(null);
-//            }
-//
-//        else if (current.getRightChild() == null)
-//            if (current == root) {
-//                root = current.getLeftChild();
-//            } else if (isLeftChild) {
-//                parent.setLeftChild(current.getLeftChild());
-//            } else {
-//                parent.setRightChild(current.getLeftChild());
-//            }
-//
-//        else if (current.getLeftChild() == null)
-//            if (current == root) {
-//                root = current.getRightChild();
-//            } else if (isLeftChild) {
-//                parent.setLeftChild(current.getRightChild());
-//            } else {
-//                parent.setRightChild(current.getLeftChild());
-//            }
+//        TreeNode toDel = find(data);
+//        toDel.delete();
 //    }
+
+    public void delete(Integer data) {
+        TreeNode current = this.root;
+        TreeNode parent = this.root;
+        boolean isLeftChild = false;
+
+        if (current == null)
+            return; // tree is empty
+
+        while (current != null && current.getData() != data) {
+            parent = current;
+            if (data < current.getData()) {
+                current = current.getLeftChild();
+                isLeftChild = true;
+            } else {
+                current = current.getRightChild();
+                isLeftChild = false;
+            }
+        }
+        if (current == null)
+            return; // node to be deleted not found
+
+        // this is case 1
+        if (current.getLeftChild() == null && current.getRightChild() == null) {
+            if (current == root) {
+                root = null; // no elements in tree now
+            } else {
+                if (isLeftChild)
+                    parent.setLeftChild(null);
+                else
+                    parent.setRightChild(null);
+            }
+        }
+        // This is case 2 broken down further into 2 separate cases
+        else if (current.getRightChild() == null) {// current has left child
+            if (current == root) {
+                root = current.getLeftChild();
+            } else if (isLeftChild) {
+                parent.setLeftChild(current.getLeftChild());
+            } else {
+                parent.setRightChild(current.getLeftChild());
+            }
+        } else if (current.getLeftChild() == null) {// current has right child
+            if (current == root) {
+                root = current.getRightChild();
+            } else if (isLeftChild) {
+                parent.setLeftChild(current.getRightChild());
+            } else {
+                parent.setRightChild(current.getRightChild());
+            }
+        }
+        // This is case 3 - Most complicated (node to be deleted has 2 children)
+        else {
+            TreeNode successor = getSuccessor(current);
+            if (current == root)
+                root = successor;
+            else if (isLeftChild) {
+                parent.setLeftChild(successor);
+            } else {
+                parent.setRightChild(successor);
+            }
+            successor.setLeftChild(current.getLeftChild());
+        }
+    }
+
+    private TreeNode getSuccessor(TreeNode node) {
+        TreeNode parentOfSuccessor = node;
+        TreeNode successor = node;
+        TreeNode current = node.getRightChild();
+        while (current != null) {
+            parentOfSuccessor = successor;
+            successor = current;
+            current = current.getLeftChild();
+        }
+        if (successor != node.getRightChild()) {
+            parentOfSuccessor.setLeftChild(successor.getRightChild());
+            successor.setRightChild(node.getRightChild());
+        }
+        return successor;
+    }
+
+    public void traverseInOrder() {
+        if (this.root != null)
+            this.root.traverseInOrder();
+        System.out.println();
+    }
 }
