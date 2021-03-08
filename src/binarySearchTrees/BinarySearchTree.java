@@ -20,7 +20,7 @@ public class BinarySearchTree {
 
         if (root != null)
             return root.find(data);
-        
+
         return null;
     }
 
@@ -56,6 +56,24 @@ public class BinarySearchTree {
                     parent.setLeftChild(null);
                 else
                     parent.setRightChild(null);
+            }
+
+        else if (current.getRightChild() == null)
+            if (current == root) {
+                root = current.getLeftChild();
+            } else if (isLeftChild) {
+                parent.setLeftChild(current.getLeftChild());
+            } else {
+                parent.setRightChild(current.getLeftChild());
+            }
+
+        else if (current.getLeftChild() == null)
+            if (current == root) {
+                root = current.getRightChild();
+            } else if (isLeftChild) {
+                parent.setLeftChild(current.getRightChild());
+            } else {
+                parent.setRightChild(current.getLeftChild());
             }
     }
 }
