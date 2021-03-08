@@ -16,6 +16,18 @@ public class BinarySearchTree {
         else root.insert(data);
     }
 
+    public Integer smallest() {
+        if (this.root != null)
+            return root.smallest();
+        return null;
+    }
+
+    public Integer largest() {
+        if (this.root != null)
+            return root.largest();
+        return null;
+    }
+
     public TreeNode find(Integer data) {
 
         if (root != null)
